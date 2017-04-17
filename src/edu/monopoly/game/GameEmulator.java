@@ -26,12 +26,14 @@ public class GameEmulator {
     private List<Command> comms;
     private Board board;
     private PrintStream output;
+    private int commandsExecuted;
 
     public GameEmulator() {
         players = null;
         comms = null;
         board = null;
         output = null;
+        commandsExecuted = 0;
     }
 
     public GameEmulator(Map<String, Player> players, List<Command> comms, Board board, PrintStream output) {
@@ -63,14 +65,8 @@ public class GameEmulator {
         StringBuilder statsPassTurn = new StringBuilder();
         DecimalFormat df = new DecimalFormat("#0.00");
         df.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
-        int commands = 0;
         sb.append("1:");
-        for(Command c : this.getComms()){
-            if(c.getCommandType().equals(CommandType.DICEROLL)){
-                commands++;
-            }
-        }
-        sb.append(commands / this.getPlayers().size()).append('\n');
+        sb.append((int)Math.ceil((double)commandsExecuted / this.getPlayers().size())).append('\n');
         for(Player p : this.getPlayers().values()){
             statsLaps.append(p.getId()).append('-').append(p.getStatsLaps()).append(';');
             statsMoney.append(p.getId()).append('-').append(df.format(p.getMoney())).append(';');
@@ -182,44 +178,33 @@ public class GameEmulator {
             player.incrementStatsSkipTurn();
         }
     }
-    
-    
+
     public void play() throws InsufficientGameInformationException, UnexpectedNegativeNumberException {
         this.configureInternalGameStart();
+        this.commandsExecuted = 0;
 
         for(Command c : comms){
-            if(c.getCommandType().equals(CommandType.DUMP)){
-                printToOutput(this.generateStatistics());
+            if(this.hasWinner() || c.getCommandType().equals(CommandType.DUMP)){
                 break;
             }else if(c.getCommandType().equals(CommandType.DICEROLL)){
                 PlayCommand play = (PlayCommand)c;
                 this.computePlayerMove(play.getPlayer(), play.getNumber());
+                this.commandsExecuted++;
             }
         }
+        printToOutput(this.generateStatistics());
     }
 
     public Map<String, Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(Map<String, Player> players) {
-        this.players = players;
-    }
-
     public List<Command> getComms() {
         return comms;
     }
 
-    public void setComms(List<Command> comms) {
-        this.comms = comms;
-    }
-
     public Board getBoard() {
         return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
     }
 
     public PrintStream getOutput() {
@@ -230,4 +215,23 @@ public class GameEmulator {
         this.output = output;
     }
 
+    public int getCommandsExecuted() {
+        return commandsExecuted;
+    }
+
+    public void setPlayers(Map<String, Player> players) {
+        this.players = players;
+    }
+
+    public void setComms(List<Command> comms) {
+        this.comms = comms;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public void setCommandsExecuted(int commandsExecuted) {
+        this.commandsExecuted = commandsExecuted;
+    }
 }

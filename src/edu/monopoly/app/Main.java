@@ -15,7 +15,7 @@ public class Main {
 
     public static final String BOARDPATH = "tabuleiro.txt";
     public static final String PLAYINGPATH = "jogadas.txt";
-    public static final String OUTPUT = "estatistica.txt";
+    public static final String OUTPUT = "estatisticas.txt";
     public static final String EXCEPTIONERRORMESSAGE = "[AN EXCEPTION HAS OCCURRED]";
 
     public static void main(String[] args) {

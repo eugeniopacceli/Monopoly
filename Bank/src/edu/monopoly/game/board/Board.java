@@ -1,12 +1,8 @@
 package edu.monopoly.game.board;
 
 import edu.monopoly.game.board.cells.BoardCell;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import edu.monopoly.game.actors.Bank;
 
@@ -37,6 +33,17 @@ public class Board {
         for (BoardCell c : cells) {
             output.println(c.toString());
         }
+    }
+    
+    public BoardCell findCellByPosition(int i){
+        BoardCell cell = null;
+        for(BoardCell c : this.getCells()){
+            if(c.getPosition() == i){
+                cell = c;
+                break;
+            }
+        }
+        return cell;
     }
 
     public Bank getBank() {

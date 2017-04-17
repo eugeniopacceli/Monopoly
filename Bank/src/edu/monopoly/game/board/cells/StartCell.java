@@ -2,18 +2,18 @@ package edu.monopoly.game.board.cells;
 
 public class StartCell extends BoardCell {
 
-    private static double passValue = 500.0;
+    private double passValue = 500.0;
 
     public StartCell(int position) {
         super(position);
     }
 
-    public static double getPassValue() {
+    public double getPassValue() {
         return passValue;
     }
 
-    public static void setPassValue(double passValue) {
-        StartCell.passValue = passValue;
+    public void setPassValue(double passValue) {
+        this.passValue = passValue;
     }
 
     @Override

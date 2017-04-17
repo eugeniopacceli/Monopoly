@@ -23,5 +23,5 @@ public interface GameReader {
 
     public List<Command> generateCommandsList() throws InvalidDiceRollException, IOException;
     public Board generateBoard() throws InvalidCellTypeException, IOException;
-    public Map<Integer, Player> generatePlayersList() throws InvalidCellTypeException, IOException;
+    public Map<String, Player> generatePlayersList() throws InvalidCellTypeException, IOException;
 }

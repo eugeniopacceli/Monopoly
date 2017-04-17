@@ -5,7 +5,7 @@ public class Bank extends GameActor {
     private static Bank bank;
 
     private Bank() {
-        super(Double.POSITIVE_INFINITY);
+        super("Bank",Double.POSITIVE_INFINITY);
     }
 
     public static Bank getInstanceOf() {

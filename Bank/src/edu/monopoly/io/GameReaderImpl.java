@@ -33,7 +33,7 @@ import java.util.Scanner;
 public class GameReaderImpl implements GameReader{
     protected String boardInputAddr;
     protected String diceRollsInput;
-    protected HashMap<Integer, Player> players;
+    protected HashMap<String, Player> players;
     protected double playerStartAmount;
 
     public GameReaderImpl(){
@@ -55,28 +55,27 @@ public class GameReaderImpl implements GameReader{
 
     private PlayCommand generateDiceRoll(String parameters) throws InvalidDiceRollException {
         String[] args = parameters.split(";");
-        Integer player = Integer.parseInt(args[1]);
+        String playerId = args[1];
         int diceNumber = Integer.parseInt(args[2]);
 
         if(diceNumber < 1 || diceNumber > 6){
             throw new InvalidDiceRollException();
         }
         
-        if(!players.containsKey(player)){
-            players.put(player, new Player(player, this.playerStartAmount));
+        if(!players.containsKey(playerId)){
+            players.put(playerId, new Player(playerId, this.playerStartAmount));
         }
         
-        return new PlayCommand(players.get(player),diceNumber);
+        return new PlayCommand(players.get(playerId),diceNumber);
     }
     
     private BoardCell generateCell(Bank bank, String parameters) throws InvalidCellTypeException {
         String[] args = parameters.split(";");
         int cellPosition = Integer.parseInt(args[1]);
         int cellType = Integer.parseInt(args[2]);
-
         int propertyType;
-        int propertyValue;
-        int rentValue;
+        double propertyValue;
+        double rentValue;
 
         BoardCell cell;
 
@@ -89,13 +88,13 @@ public class GameReaderImpl implements GameReader{
                 break;
             case 3:
                 propertyType = Integer.parseInt(args[3]);
-                propertyValue = Integer.parseInt(args[4]);
-                rentValue = Integer.parseInt(args[5]);
+                propertyValue = Double.parseDouble(args[4]);
+                rentValue = Double.parseDouble(args[5]);
 
                 cell = new PropertyCell(cellPosition,
                         PropertyType.values()[propertyType],
                         propertyValue,
-                        rentValue,
+                        (rentValue/100)*propertyValue,
                         bank);
                 break;
             default:
@@ -137,12 +136,13 @@ public class GameReaderImpl implements GameReader{
             BoardCell cell = generateCell(Bank.getInstanceOf(), line);
             cells.add(cell);
         }
+        cells.sort((a,b) -> { return a.getPosition() - b.getPosition();});
         input.close();
         return new Board(cells, Bank.getInstanceOf());
     }
 
     @Override
-    public Map<Integer, Player> generatePlayersList() throws InvalidCellTypeException, IOException {
+    public Map<String, Player> generatePlayersList() throws InvalidCellTypeException, IOException {
         Scanner input = new Scanner(new File(this.diceRollsInput));
         String line = input.nextLine();
         String[] firstLine = line.split("%");
@@ -155,10 +155,10 @@ public class GameReaderImpl implements GameReader{
                 continue;
             }
             
-            Integer player = Integer.parseInt(args[1]);
+            String playerId = args[1];
 
-            if(!players.containsKey(player)){
-                players.put(player, new Player(player, this.playerStartAmount));
+            if(!players.containsKey(playerId)){
+                players.put(playerId, new Player(playerId, this.playerStartAmount));
             }
         }
         input.close();

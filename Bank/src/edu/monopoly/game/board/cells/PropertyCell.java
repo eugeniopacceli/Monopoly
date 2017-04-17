@@ -1,5 +1,6 @@
 package edu.monopoly.game.board.cells;
 
+import edu.monopoly.exceptions.UnexpectedNegativeNumberException;
 import edu.monopoly.game.actors.Bank;
 import edu.monopoly.game.actors.GameActor;
 import edu.monopoly.game.actors.Player;
@@ -20,18 +21,19 @@ public class PropertyCell extends BoardCell {
         this.setPropertyType(type);
         this.setBuyValue(buyValue);
         this.setRentValue(rentValue);
+        this.setOwner(owner);
+    }
+
+    public void setOwner(GameActor owner) {
+        if(this.getOwner() != null){
+            this.getOwner().getProperties().remove(this);
+        }
         this.owner = owner;
+        owner.getProperties().add(this);
     }
 
     public GameActor getOwner() {
         return this.owner;
-    }
-
-    public void buyProperty(Player buyer, PropertyCell property) {
-        if (buyer.getMoney() >= property.getBuyValue()) {
-            buyer.setMoney(buyer.getMoney() - property.getBuyValue());
-            property.owner = buyer;
-        }
     }
 
     public PropertyType getPropertyType() {
@@ -66,4 +68,6 @@ public class PropertyCell extends BoardCell {
                 + "\t\t[RentValue]    = " + this.getRentValue() + "\n"
                 + "\t\t[Owner]        = " + this.getOwner().toString();
     }
+    
+    
 }

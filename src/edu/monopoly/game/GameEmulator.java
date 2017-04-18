@@ -83,7 +83,7 @@ public class GameEmulator {
         StringBuilder statsMoney = new StringBuilder();
         StringBuilder statsRentReceived = new StringBuilder();
         StringBuilder statsRentPaid = new StringBuilder();
-        StringBuilder statsPropertyBuyed = new StringBuilder();
+        StringBuilder statsPropertyBought = new StringBuilder();
         StringBuilder statsPassTurn = new StringBuilder();
         DecimalFormat df = new DecimalFormat("#0.00"); // Formats the output to the desired number format (dd.dd)
         df.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US)); // We are using '.' instead of ','
@@ -94,21 +94,21 @@ public class GameEmulator {
             statsMoney.append(p.getId()).append('-').append(df.format(p.getMoney())).append(';');
             statsRentReceived.append(p.getId()).append('-').append(df.format(p.getStatsRentReceived())).append(';');
             statsRentPaid.append(p.getId()).append('-').append(df.format(p.getStatsRentPaid())).append(';');
-            statsPropertyBuyed.append(p.getId()).append('-').append(df.format(p.getStatsPropertyBuyed())).append(';');
+            statsPropertyBought.append(p.getId()).append('-').append(df.format(p.getStatsPropertyBought())).append(';');
             statsPassTurn.append(p.getId()).append('-').append(p.getStatsSkipTurn()).append(';');
         }
         statsLaps.deleteCharAt(statsLaps.lastIndexOf(";")); // There is no ';' at the end of each line, so let's fix it
         statsMoney.deleteCharAt(statsMoney.lastIndexOf(";"));
         statsRentReceived.deleteCharAt(statsRentReceived.lastIndexOf(";"));
         statsRentPaid.deleteCharAt(statsRentPaid.lastIndexOf(";"));
-        statsPropertyBuyed.deleteCharAt(statsPropertyBuyed.lastIndexOf(";"));
+        statsPropertyBought.deleteCharAt(statsPropertyBought.lastIndexOf(";"));
         statsPassTurn.deleteCharAt(statsPassTurn.lastIndexOf(";"));
         
         sb.append("2:").append(statsLaps.toString()).append('\n');
         sb.append("3:").append(statsMoney.toString()).append('\n');
         sb.append("4:").append(statsRentReceived.toString()).append('\n');
         sb.append("5:").append(statsRentPaid.toString()).append('\n');
-        sb.append("6:").append(statsPropertyBuyed.toString()).append('\n');
+        sb.append("6:").append(statsPropertyBought.toString()).append('\n');
         sb.append("7:").append(statsPassTurn.toString());
 
         return sb.toString();

@@ -10,11 +10,11 @@ import edu.monopoly.game.board.cells.PropertyCell;
 public class Player extends GameActor {
 
     private boolean isActive; // Flags if this player is still in the game
-    private BoardCell boardcell; // The current position this player is in
+    private BoardCell boardCell; // The current position this player is in
     private int statsLaps; // Statistics
     private double statsRentReceived;
     private double statsRentPaid;
-    private double statsPropertyBuyed;
+    private double statsPropertyBought;
     private int statsSkipTurn;
 
     /**
@@ -29,7 +29,7 @@ public class Player extends GameActor {
         this.statsLaps = 0;
         this.statsRentReceived = 0;
         this.statsRentPaid = 0;
-        this.statsPropertyBuyed = 0;
+        this.statsPropertyBought = 0;
         this.statsSkipTurn = 0; 
     }
     
@@ -39,7 +39,7 @@ public class Player extends GameActor {
      * @throws UnexpectedNegativeNumberException 
      */
     public void buyProperty(PropertyCell prop) throws UnexpectedNegativeNumberException {
-        this.incrementStatsPropertyBuyed(prop.getBuyValue()); // Computes statistics
+        this.incrementStatsPropertyBought(prop.getBuyValue()); // Computes statistics
         this.subtractAmount(prop.getBuyValue());
         prop.setOwner(this);
     }
@@ -88,11 +88,11 @@ public class Player extends GameActor {
     }
 
     public BoardCell getBoardcell() {
-        return boardcell;
+        return boardCell;
     }
 
-    public void setBoardcell(BoardCell boardcell) {
-        this.boardcell = boardcell;
+    public void setBoardcell(BoardCell boardCell) {
+        this.boardCell = boardCell;
     }
 
     public int getStatsLaps() {
@@ -107,8 +107,8 @@ public class Player extends GameActor {
         return statsRentPaid;
     }
 
-    public double getStatsPropertyBuyed() {
-        return statsPropertyBuyed;
+    public double getStatsPropertyBought() {
+        return statsPropertyBought;
     }
 
     public int getStatsSkipTurn() {
@@ -140,11 +140,11 @@ public class Player extends GameActor {
         this.statsRentPaid += factor;
     }
     
-    private void incrementStatsPropertyBuyed(double factor) throws UnexpectedNegativeNumberException{
+    private void incrementStatsPropertyBought(double factor) throws UnexpectedNegativeNumberException{
         if(factor < 0){
             throw new UnexpectedNegativeNumberException();            
         }
-        this.statsPropertyBuyed += factor;
+        this.statsPropertyBought += factor;
     }
     
     public void incrementStatsSkipTurn() {

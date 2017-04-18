@@ -1,5 +1,9 @@
 package edu.monopoly.game.board.cells;
 
+/**
+ * An abstract class representing all the board cells.
+ * They have in common the game position they are in.
+ */
 public abstract class BoardCell {
 
     private int position;

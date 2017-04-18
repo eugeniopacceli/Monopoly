@@ -11,15 +11,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
+/**
+ * Monopoly app bootstrap
+ */
 public class Main {
 
+    // String constants
     public static final String BOARDPATH = "tabuleiro.txt";
     public static final String PLAYINGPATH = "jogadas.txt";
     public static final String OUTPUT = "estatisticas.txt";
     public static final String EXCEPTIONERRORMESSAGE = "[AN EXCEPTION HAS OCCURRED]";
 
     public static void main(String[] args) {
-        GameReader gameReader = new GameReaderImpl(BOARDPATH, PLAYINGPATH);
+        GameReader gameReader = new GameReaderImpl(BOARDPATH, PLAYINGPATH); // object that reads the inputs
         GameEmulator game;
         PrintStream outputStream;
         try {
@@ -27,14 +31,14 @@ public class Main {
             game = new GameEmulator(gameReader.generatePlayersList(),
                     gameReader.generateCommandsList(),
                     gameReader.generateBoard(),
-                    outputStream);
-            game.play();
-            outputStream.close();
-        } catch (InvalidCellTypeException |
+                    outputStream); // Instances a game
+            game.play(); // Run it
+            outputStream.close(); // Closes the output stream used by the game emulator
+        } catch (InvalidCellTypeException | 
                  InvalidDiceRollException |
                  IOException |
                  InsufficientGameInformationException |
-                 UnexpectedNegativeNumberException ex) {
+                 UnexpectedNegativeNumberException ex) { // Possible exceptions
             System.err.println(EXCEPTIONERRORMESSAGE);
             System.err.println(ex.getMessage());
             ex.printStackTrace();

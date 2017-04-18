@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/eugen/Monopoly/src/edu/monopoly/game/actors/GameActor.java</file>
             <file>file:/C:/Users/eugen/Monopoly/src/edu/monopoly/game/GameEmulator.java</file>
             <file>file:/C:/Users/eugen/Monopoly/src/edu/monopoly/app/Main.java</file>
+            <file>file:/C:/Users/eugen/Monopoly/src/edu/monopoly/game/actors/Bank.java</file>
+            <file>file:/C:/Users/eugen/Monopoly/src/edu/monopoly/game/commands/PlayCommand.java</file>
+            <file>file:/C:/Users/eugen/Monopoly/src/edu/monopoly/io/GameReaderImpl.java</file>
         </group>
     </open-files>
 </project-private>

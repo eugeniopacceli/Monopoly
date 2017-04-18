@@ -1,19 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.monopoly.game.commands;
 
 import edu.monopoly.game.actors.Player;
 
 /**
- *
- * @author eugen
+ * Specialization of Command. Represents a player move (dice roll) command.
  */
 public class PlayCommand extends Command{
-    protected Player player;
-    protected int number;
+    protected Player player; // The player making it's move
+    protected int number; // The number rolled in the dice
+
+    /**
+     * Constructors
+     * 
+     */
 
     public PlayCommand(){
         super(CommandType.DICEROLL);
@@ -25,6 +24,11 @@ public class PlayCommand extends Command{
         this.number = number;
     }
     
+    /**
+     * Setters and getters
+     *
+     */
+
     public Player getPlayer() {
         return player;
     }

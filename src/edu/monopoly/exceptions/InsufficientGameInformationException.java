@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.monopoly.exceptions;
 
 /**
- *
- * @author eugen
+ * This exception is used by an object of GameEmulator when one of the 
+ * internal object references needed by it to work are missing.
  */
 public class InsufficientGameInformationException extends Exception {
 

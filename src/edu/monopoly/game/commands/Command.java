@@ -1,17 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.monopoly.game.commands;
 
 /**
- *
- * @author eugen
+ * An abstract class for a game command. A game command can be a play by some player,
+ * or a GameEmulator command such as DUMP.
  */
 public abstract class Command {
-    protected CommandType commandType;
+    protected CommandType commandType; // The command type.
 
+    /**
+     * The only constructor possible must receive the command type.
+     * @param type CommandType of the command.
+     */
     protected Command(CommandType type){
         this.commandType = type;
     }

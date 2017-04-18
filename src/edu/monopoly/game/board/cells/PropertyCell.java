@@ -1,17 +1,26 @@
 package edu.monopoly.game.board.cells;
 
-import edu.monopoly.exceptions.UnexpectedNegativeNumberException;
-import edu.monopoly.game.actors.Bank;
 import edu.monopoly.game.actors.GameActor;
-import edu.monopoly.game.actors.Player;
 
+/**
+ * A BoardCell specialization. The property cell represents a game property.
+ * It can be bought or rented, and has a type.
+ */
 public class PropertyCell extends BoardCell {
 
-    private PropertyType propertyType;
+    private PropertyType propertyType; // An instance type
     private double buyValue;
     private double rentValue;
-    private GameActor owner;
+    private GameActor owner; // Current owner
 
+    /**
+     * The only possible constructor.
+     * @param position the cell position in the game
+     * @param type it's property type
+     * @param buyValue the value to be paid when bought by someone
+     * @param rentValue the rent value
+     * @param owner the initial cell owner
+     */
     public PropertyCell(int position,
             PropertyType type,
             double buyValue,
@@ -24,6 +33,12 @@ public class PropertyCell extends BoardCell {
         this.setOwner(owner);
     }
 
+    /**
+     * Sets the cell owner:
+     * Removes this cell from the old owner properties list, adds it to the
+     * new owner property list. Updates this owner reference too.
+     * @param owner the GameActor that owns this property
+     */
     public void setOwner(GameActor owner) {
         if(this.getOwner() != null){
             this.getOwner().getProperties().remove(this);
@@ -32,6 +47,11 @@ public class PropertyCell extends BoardCell {
         owner.getProperties().add(this);
     }
 
+    
+    /**
+     * Normal setters and getters.
+     */
+    
     public GameActor getOwner() {
         return this.owner;
     }
@@ -60,6 +80,7 @@ public class PropertyCell extends BoardCell {
         this.buyValue = buyValue;
     }
 
+    // Debuggable info
     @Override
     public String toString() {
         return "{PropertyCell} \t[Position]     = " + this.getPosition() + "\n"

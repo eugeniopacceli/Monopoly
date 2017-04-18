@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.monopoly.exceptions;
 
 /**
- *
- * @author eugen
+ * This exception is thrown by Player and other game related objects when an 
+ * negative value is received where it was not expected.
  */
 public class UnexpectedNegativeNumberException extends Exception {
     
